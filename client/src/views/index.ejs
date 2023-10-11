@@ -3,36 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-    <!-- Enlace al archivo CSS externo -->
-    <link rel="stylesheet" href="styles.css">
-    <!-- Enlace al archivo CSS de Bootstrap -->
+    <title>Chat</title>
+    <!-- Agrega referencia a Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="../styles/stayles.css" type="css">
+    
 </head>
 <body>
-    <div class="container">
-        <!-- form -->
-        <div class="container mt-5">
-            <div class="col-md-9">
-                <form action="/enviar?token=<%= token %>" method="post">
-                    <div class="card p-3">
-                        <h1 class="mb-3">Chat</h1>
-                        <textarea id="chatTextArea" class="form-control mb-3" rows="10" readonly>
-                            <% mensajes.forEach((mensaje) => { %>
-                                <%= mensaje.usuario %>: <%= mensaje.mensaje %>
-                               <% }); %> 
-                        </textarea>
-                        <input type="hidden" id="usuario" name="usuario" value="<%= nombreUsuario %>" /> <!-- Campo oculto con el nombre de usuario -->
-                        <input type="text" id="mensaje" name="mensaje" class="form-control mb-3" placeholder="Mensaje" aria-label="Mensaje" required>
-                        <button class="btn btn-primary">Enviar</button>
-                        <a href="/logout" class="btn btn-danger">Cerrar Sesión</a> <!-- Botón para cerrar sesión -->
+    <div class="container mt-5 chat-container">
+        <!-- Contenedor del chat -->
+        <form action="/enviar?token=<%= token %>" method="post">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Área de mensajes -->
+                    <div class="chat-box" id="chatTextArea">
+                        <% mensajes.forEach((mensaje) => { %>
+                            <div class="message">
+                                <strong><%= mensaje.usuario %>:</strong> <%= mensaje.mensaje %>
+                            </div>
+                        <% }); %>
                     </div>
-                </form>
+                    
+                    <!-- Entrada de mensaje -->
+                    <div class="input-group mt-3">
+                        <input type="hidden" id="usuario" name="usuario" value="<%= nombreUsuario %>" /> <!-- Campo oculto con el nombre de usuario -->
+                        <input type="text" id="mensaje" name="mensaje" class="form-control" placeholder="Mensaje" aria-label="Mensaje" required>
+                        <button class="btn btn-primary">Enviar</button>
+                        <a href="/logout" class="btn btn-danger ms-2">Cerrar Sesión</a> <!-- Botón para cerrar sesión -->
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
-    
-    <!-- Enlace a Bootstrap JS -->
+
+    <!-- Agrega referencia a Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

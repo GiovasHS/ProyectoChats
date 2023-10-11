@@ -1,0 +1,17 @@
+/* Estilos personalizados */
+.chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.chat-box {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    min-height: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+.message {
+    margin: 5px 0;
+}
