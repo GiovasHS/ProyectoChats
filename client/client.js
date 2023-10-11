@@ -1,25 +1,34 @@
-const socket = io(); // Conecta al servidor de sockets
+const net = require('net');
+const router = express.Router();
+const express = require('express');
+const readline = require('readline-sync');
+const servidor ={
+    port:3000,
+    host:'localhost'
+}
 
-// Obtén referencias a los elementos del formulario de chat en tu HTML
-const chatForm = document.getElementById('chat-form');
-const chatInput = document.getElementById('chat-input');
-const chatMessages = document.getElementById('chat-messages');
+const client = net.createConnection(servidor);
 
-// Evento para manejar el envío de mensajes
-chatForm.addEventListener('submit', e => {
-  e.preventDefault();
-  const message = chatInput.value;
+client.on('connect', ()=>{
+    console.log('conexion satisfactoria')
+    sendLine()
+})
 
-  // Envía el mensaje al servidor de sockets
-  socket.emit('chat message', message);
+client.on('data', (data)=>{
+    console.log('El servidor dice' +data)
+    sendLine()
+})
 
-  // Limpia el campo de entrada
-  chatInput.value = '';
-});
+client.on('error', (err)=>{
+    console.log(err.message)
+})
 
-// Evento para recibir mensajes del servidor
-socket.on('chat message', message => {
-  const messageElement = document.createElement('li');
-  messageElement.innerText = `${message.username}: ${message.message}`;
-  chatMessages.appendChild(messageElement);
-});
+
+function sendLine(){
+    var line = readline.question('\n ingresa un mensaje \n')
+    if (line==0) {
+        client.end()
+    }else{
+        client.write(line)
+    }
+}
