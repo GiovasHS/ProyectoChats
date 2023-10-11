@@ -37,7 +37,7 @@ app.listen(app.get('port'), () => {
 });
 
 
-mongoose.connect("mongodb+srv:node//eserna19:123456@cluster0.cjjatzy.mongodb.net/proyecto?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://alvaradoghas6:Giovanny1@cluster0.itlehwz.mongodb.net/Chat?retryWrites=true&w=majority")
 .then(db=>console.log('BD conectada'))
 .catch(err=>console.log('autenticacion fallida'));
 
