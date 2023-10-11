@@ -17,50 +17,14 @@ app.use(bodyParse.urlencoded({extended: false}));
 app.use('/',IndexRoutes);
 
 
-// establecer sistema de vistas
+// sistema de vistas
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-// Middleware de autenticación
-/*function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        // Si el usuario está autenticado, permite que continúe
-        return next();
-    }
-    // Si el usuario no está autenticado, redirige a la página de inicio de sesión
-    res.redirect('/');
-}*/
-
 
 app.listen(app.get('port'), () => {
     console.log('El servidor esta funcionando en el puerto ', app.get('port'));
 });
 
-
 mongoose.connect("mongodb+srv://alvaradoghas6:Giovanny1@cluster0.itlehwz.mongodb.net/Chat?retryWrites=true&w=majority")
 .then(db=>console.log('BD conectada'))
 .catch(err=>console.log('autenticacion fallida'));
-
-
-
-
-
-
-
-
-// app.use((req, res, next)=>{
-//     res.locals.mensajes = '';
-//     next();
-// });
-
-
-/*app.get('/login', (req, res) => {
-    res.render('login');
-});*/
-
-// app.get('/index', (req, res) => {
-//     res.render('index');
-// });
-
-
-//Rutas
